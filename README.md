@@ -106,7 +106,7 @@ Ratio of favorable outcomes between protected and unprotected groups.
 
 ---
 
-## ▶️ How to Run the Project
+## ▶️ How to Run the Project in VScode
 
 ### 1️⃣ Clone Repository
 ```bash
