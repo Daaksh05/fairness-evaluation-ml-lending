@@ -47,7 +47,7 @@ Financial lending decisions directly affect individuals’ access to economic op
 ---
 
 
----
+
 
 ## 📊 Dataset Description
 The dataset represents simplified loan application records.
