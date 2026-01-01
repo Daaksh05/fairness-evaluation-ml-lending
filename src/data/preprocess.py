@@ -1,36 +1,43 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
-def preprocess_data(df: pd.DataFrame, target: str = None, sensitive_features: list = None, scaler=None):
-    """Clean and preprocess dataset. If scaler is provided, use it for transform only."""
-    
-    df = df.dropna()
+# ✅ MUST match training exactly
+FEATURE_ORDER = [
+    "income",
+    "loan_amount",
+    "credit_score",
+    "employment_years",
+    "age",
+    "gender"
+]
 
-    # Separate X and y if target is provided
-    if target:
-        X = df.drop(columns=[target])
-        y = df[target]
-    else:
-        X = df
-        y = None
+def preprocess_data(df: pd.DataFrame, scaler: StandardScaler = None):
+    """
+    Preprocess input data for inference.
+    Ensures feature alignment with training.
+    """
 
-    # Identify numeric and categorical features
-    numeric_features = X.select_dtypes(include=['number']).columns
-    categorical_features = X.select_dtypes(include=['object']).columns
+    df = df.copy()
 
-    # One-hot encode categorical variables
-    if len(categorical_features) > 0:
-        X = pd.get_dummies(X, columns=categorical_features, drop_first=True)
+    # ✅ Encode gender exactly as training
+    df["gender"] = df["gender"].apply(lambda x: 1 if str(x).lower() == "male" else 0)
 
-    # Scale numeric values
-    if scaler is None:
-        scaler = StandardScaler()
-        if len(numeric_features) > 0:
-            X[numeric_features] = scaler.fit_transform(X[numeric_features])
-    else:
-        if len(numeric_features) > 0:
-            X[numeric_features] = scaler.transform(X[numeric_features])
+    # ✅ Drop API-only columns safely
+    drop_cols = ["race", "term", "property_value"]
+    for col in drop_cols:
+        if col in df.columns:
+            df.drop(columns=[col], inplace=True)
 
-    print("[INFO] Data preprocessed successfully.")
+    # ✅ ENSURE all required features exist
+    for col in FEATURE_ORDER:
+        if col not in df.columns:
+            df[col] = 0
 
-    return X, y, scaler
+    # ✅ Enforce exact feature order
+    df = df[FEATURE_ORDER]
+
+    # ✅ Apply scaler
+    if scaler is not None:
+        df[:] = scaler.transform(df)
+
+    return df

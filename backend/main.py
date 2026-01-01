@@ -51,34 +51,23 @@ async def predict(applicant: LoanApplicant):
         raise HTTPException(status_code=503, detail="Model not loaded. Please train the model first.")
 
     try:
-        # Convert input data to a pandas DataFrame
         input_data = pd.DataFrame([applicant.dict()])
 
-        # Preprocess the input data
-        # The 'target' column is not needed for prediction
-        preprocessed_data, _ = preprocess_data(input_data, target_column=None, scaler=scaler)
+        # ✅ Correct preprocessing call
+        X = preprocess_data(input_data, scaler=scaler)
 
-        # Make a prediction
-        prediction = model.predict(preprocessed_data)[0]
-        decision = "Approved" if prediction == 1 else "Rejected"
-
-        # Evaluate fairness
-        # For a single prediction, fairness metrics are not very meaningful.
-        # Typically, you would evaluate fairness on a batch of data.
-        # Here, we'll return a placeholder for the fairness metrics.
-        fairness_metrics = {
-            "demographic_parity_difference": "N/A for single prediction",
-            "disparate_impact": "N/A for single prediction"
-        }
+        prediction = model.predict(X)[0]
+        confidence = int(model.predict_proba(X).max() * 100)
 
         return {
-            "loan_decision": decision,
-            "fairness_metrics": fairness_metrics
+            "approved": bool(prediction),
+            "confidence": confidence
         }
+
     except Exception as e:
-        # Log the error for debugging
-        print(f"An error occurred: {e}")
-        raise HTTPException(status_code=500, detail="Internal Server Error")
+        print("❌ ERROR:", e)
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 # To run the app, use the command:
 # uvicorn backend.main:app --reload
