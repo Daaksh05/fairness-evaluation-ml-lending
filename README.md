@@ -1,5 +1,8 @@
 # 🤖 Fairness Evaluation of ML Models in Financial Lending
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18362174.svg)](https://doi.org/10.5281/zenodo.18362174)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 An **end-to-end Responsible AI system** for **loan approval prediction**, designed with a strong focus on **fairness, transparency, and societal impact**.  
 This project combines **Machine Learning**, **Ethical AI**, and **API deployment** using **FastAPI**.
 
@@ -189,7 +192,7 @@ They are included **only for fairness auditing, counterfactual analysis, and soc
 
 ## 🎓 Academic Relevance (AI & Society / PSL)
 
-This project demonstrates:
+This project is published as a **citable research artifact with a Zenodo DOI**, demonstrating:
 
 ✨ Ethical AI system design  
 ✨ Bias-aware ML pipelines  
@@ -201,6 +204,28 @@ This project demonstrates:
 ## 📄 License
 
 📘 This project is intended for **academic and educational purposes only**.
+
+---
+
+📖 Citation
+
+If you use this project in academic work, please cite it as:
+BibTeX
+@software{daakshayani2026fairness,
+  author  = {Daakshayani, N. S.},
+  title   = {Fairness Evaluation of Machine Learning Models in Financial Lending},
+  year    = {2026},
+  version = {1.0.0},
+  doi     = {10.5281/zenodo.18362174},
+  url     = {https://github.com/Daaksh05/fairness-evaluation-ml-lending}
+}
+
+---
+
+APA
+
+Daakshayani, N. S. (2026). Fairness Evaluation of Machine Learning Models in Financial Lending 
+(Version 1.0.0) [Computer software]. https://doi.org/10.5281/zenodo.18362174
 
 ---
 
