@@ -227,6 +227,8 @@ APA
 Daakshayani, N. S. (2026). Fairness Evaluation of Machine Learning Models in Financial Lending 
 (Version 1.0.0) [Computer software]. https://doi.org/10.5281/zenodo.18362174
 
+Daakshayani N S (2025). Fairness Evaluation in Machine Learning for Lending Decisions: A Comprehensive Framework. International Journal of Computer Techniques, 12(6). ISSN: 2394-2231.
+
 ---
 
 ## 🙌 Author Daakshayani
