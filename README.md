@@ -1,21 +1,27 @@
-# 🤖 Fairness Evaluation of ML Models in Financial Lending
+# 🤖 Fairness-Aware Financial Lending AI
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18362174.svg)](https://doi.org/10.5281/zenodo.18362174)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/Daaksh05/fairness-evaluation-ml-lending)
 
-An **end-to-end Responsible AI system** for **loan approval prediction**, designed with a strong focus on **fairness, transparency, and societal impact**.  
-This project combines **Machine Learning**, **Ethical AI**, and **API deployment** using **FastAPI**.
+An **end-to-end Responsible AI system** that combines a rigorous fairness-aware machine learning model with a modern, interactive full-stack application.
+
+The system predicts loan approvals while providing **real-time explanations** for its decisions, demonstrating that high-performance AI can be transparent and ethically sound.
 
 ---
 
-## 🌟 Key Highlights
+## 🌟 Key Features
 
-✅ Loan approval prediction using Logistic Regression  
-✅ Ethical handling of sensitive attributes (gender, race)  
-✅ Fairness-aware ML pipeline design  
-✅ Reproducible training & inference using saved artifacts  
-✅ FastAPI backend with REST endpoints  
-✅ Ideal for **AI & Society / Responsible AI / PSL coursework**
+### 🧠 Intelligent Backend
+- **Fairness-Aware ML**: Logistic Regression model trained with fairness constraints.
+- **Explainable AI (XAI)**: Provides real-time "Decision Factors" explaining *why* an application was approved or denied.
+- **FastAPI**: High-performance, asynchronous REST API.
+- **Artifact Management**: Reproducible inference using versioned model/scaler artifacts.
+
+### ✨ Modern Frontend
+- **Interactive Demo**: Real-time loan application simulation.
+- **React + Vite**: Blazing fast performance.
+- **Beautiful UI**: Glassmorphism design, smooth animations (Framer Motion), and responsive layout.
 
 ---
 
@@ -24,193 +30,100 @@ This project combines **Machine Learning**, **Ethical AI**, and **API deployment
 ```
 fairness-evaluation-ml-lending/
 │
-├── backend/
-│   └── main.py                🚀 FastAPI backend
+├── api/                      🚀 Serverless Entry Point (Vercel)
+│   └── index.py
 │
-├── scripts/
-│   └── train_model.py         🧠 Model training script
+├── backend/                  🐍 FastAPI Backend
+│   ├── main.py              (API Routes & Logic)
+│   └── __init__.py
 │
-├── src/
-│   └── data/
-│       └── preprocess.py     🔄 Shared preprocessing logic
+├── landing-page/             ⚛️ React Frontend
+│   ├── src/                 (Components, Styles, App.jsx)
+│   ├── dist/                (Built static assets)
+│   └── vite.config.js
 │
-├── data/
-│   └── raw/
-│       └── lending_data.csv  📊 Dataset
-│
-├── models/                   📦 Generated ML artifacts
+├── models/                   📦 ML Artifacts
 │   ├── loan_approval_model.pkl
-│   ├── scaler.pkl
-│   └── feature_order.pkl
+│   └── scaler.pkl
 │
-├── venv/                     🐍 Virtual environment
-└── README.md
+├── data/                     📊 Datasets
+│   └── raw/
+│
+└── requirements.txt          📋 Dependencies
 ```
 
 ---
 
-## ⚙️ Requirements
+## 🚀 Quick Start (Locally)
 
-- 🐍 Python **3.10+**
-- 📦 pip
-- 💻 Windows / macOS / Linux
+### 1. Backend Setup (Python)
 
----
-
-## 🚀 How to Run the Project (Step-by-Step)
-
-### 1️⃣ Clone the Repository
-
-```
+```bash
+# Clone the repository
 git clone https://github.com/Daaksh05/fairness-evaluation-ml-lending.git
 cd fairness-evaluation-ml-lending
-```
 
----
-
-### 2️⃣ Create & Activate Virtual Environment
-
-```
+# Create (and activate) a virtual environment
 python -m venv venv
-```
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-**Windows**
-```
-venv\Scripts\activate
-```
+# Install dependencies
+pip install -r requirements.txt
 
-**macOS / Linux**
+# Start the API Server
+python -m uvicorn backend.main:app --reload
 ```
-source venv/bin/activate
+*The backend will run at `http://localhost:8000`*
+
+### 2. Frontend Setup (Node.js)
+
+Open a new terminal window:
+
+```bash
+cd landing-page
+
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
 ```
+*The website will run at `http://localhost:5173`*
 
 ---
 
-### 3️⃣ Install Dependencies
+## ☁️ Deployment (Vercel)
 
-```
-pip install fastapi uvicorn pandas scikit-learn joblib
-```
+This project is configured for one-click deployment on **Vercel**.
 
----
-
-### 4️⃣ Prepare Dataset 📊
-
-Ensure the following file exists:
-
-```
-data/raw/lending_data.csv
-```
-
-Required columns:
-
-```
-loan_amount,income,credit_score,age,gender,race,loan_status
-```
-
----
-
-### 5️⃣ Train the Model (MANDATORY) 🧠
-
-⚠️ This step **must be completed before starting the backend**.
-
-```
-python scripts/train_model.py
-```
-
-Expected output:
-
-```
-✅ Training complete
-📦 loan_approval_model.pkl created
-📦 scaler.pkl created
-📦 feature_order.pkl created
-```
-
----
-
-### 6️⃣ Start the Backend API 🚀
-
-```
-uvicorn backend.main:app --reload
-```
-
-If successful:
-
-```
-INFO: Application startup complete
-```
-
----
-
-## 🌐 API Usage
-
-### 🔍 Swagger UI
-
-Open in your browser:
-
-```
-http://localhost:8000/docs
-```
-
----
-
-### 📥 Example Prediction Input
-
-```
-{
-  "loan_amount": 250000,
-  "term": 240,
-  "property_value": 400000,
-  "income": 85000,
-  "credit_score": 720,
-  "age": 32,
-  "gender": "male",
-  "race": "asian"
-}
-```
-
----
-
-### 📤 Example Response
-
-```
-{
-  "approved": true,
-  "confidence": 91
-}
-```
+1.  **Push** this repository to GitHub.
+2.  Import the project into Vercel.
+3.  **Important Configuration**:
+    *   **Root Directory**: `fairness-evaluation-ml-lending` (or `./` if at repo root).
+    *   **Framework Preset**: Select **Vite**.
+    *   **Build Settings (Override)**:
+        *   **Build Command**: `cd landing-page && npm install && npm run build`
+        *   **Output Directory**: `landing-page/dist`
+        *   **Install Command**: `cd landing-page && npm install`
+4.  **Deploy!** Vercel will automatically handle both the Python backend (serverless functions) and the React frontend.
 
 ---
 
 ## 🧠 Ethical AI & Fairness Note ⚖️
 
-Sensitive attributes such as **gender** and **race** are **NOT used to decide loan approval**.  
-They are included **only for fairness auditing, counterfactual analysis, and societal impact evaluation**, aligning with Responsible AI principles.
+Sensitive attributes such as **gender** and **race** are **NOT used to decide loan approval**.
+They are included in the request payload only for:
+1.  **Fairness Auditing**: Analyzing disparate impact across demographic groups.
+2.  **Societal Impact Evaluation**: Ensuring the model aligns with Responsible AI principles.
 
 ---
 
-## 🎓 Academic Relevance (AI & Society / PSL)
-
-This project is published as a **citable research artifact with a Zenodo DOI**, demonstrating:
-
-✨ Ethical AI system design  
-✨ Bias-aware ML pipelines  
-✨ Transparency & reproducibility  
-✨ Societal impact of algorithmic decision-making  
-
----
-
-## 📄 License
-
-📘 This project is intended for **academic and educational purposes only**.
-
----
-
-📖 Citation
+## 📖 Citation
 
 If you use this project in academic work, please cite it as:
-BibTeX
+
+**BibTeX**
+```bibtex
 @software{daakshayani2026fairness,
   author  = {Daakshayani, N. S.},
   title   = {Fairness Evaluation of Machine Learning Models in Financial Lending},
@@ -219,19 +132,7 @@ BibTeX
   doi     = {10.5281/zenodo.18362174},
   url     = {https://github.com/Daaksh05/fairness-evaluation-ml-lending}
 }
+```
 
----
-
-APA
-
-Daakshayani, N. S. (2026). Fairness Evaluation of Machine Learning Models in Financial Lending 
-(Version 1.0.0) [Computer software]. https://doi.org/10.5281/zenodo.18362174
-
-Daakshayani N S (2025). Fairness Evaluation in Machine Learning for Lending Decisions: A Comprehensive Framework. International Journal of Computer Techniques, 12(6). ISSN: 2394-2231.
-
----
-
-## 🙌 Author Daakshayani
-
-**Daaksh05**  
-🤖 AI | 📊 Machine Learning | ⚖️ Fairness | 🌍 Responsible AI
+**APA**
+> Daakshayani, N. S. (2026). Fairness Evaluation of Machine Learning Models in Financial Lending (Version 1.0.0) [Computer software]. https://doi.org/10.5281/zenodo.18362174
