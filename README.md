@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18362174.svg)](https://doi.org/10.5281/zenodo.18362174)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/Daaksh05/fairness-evaluation-ml-lending)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Site-2ea44f?style=for-the-badge&logo=vercel)](https://fairness-evaluation-ml-lending-g4gchi9u2-daaksh05s-projects.vercel.app)
 
 An **end-to-end Responsible AI system** that combines a rigorous fairness-aware machine learning model with a modern, interactive full-stack application.
 
