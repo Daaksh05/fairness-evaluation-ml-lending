@@ -38,6 +38,7 @@ def preprocess_data(df: pd.DataFrame, scaler: StandardScaler = None):
 
     # ✅ Apply scaler
     if scaler is not None:
-        df[:] = scaler.transform(df)
+        df = df.astype(float)
+        df.iloc[:, :] = scaler.transform(df)
 
     return df

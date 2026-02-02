@@ -1,8 +1,8 @@
+fastapi
+uvicorn
 pandas
-numpy
 scikit-learn
-matplotlib
-seaborn
-fairlearn
-jupyter
-streamlit
+joblib
+pydantic
+python-multipart
+number
