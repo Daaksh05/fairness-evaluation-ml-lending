@@ -16,7 +16,9 @@ from src.fairness.evaluate_fairness import evaluate_fairness
 app = FastAPI(
     title="FairLend AI API",
     description="API for predicting loan approval and evaluating fairness.",
-    version="1.0.0"
+    version="1.0.0",
+    docs_url="/api/docs",
+    openapi_url="/api/openapi.json"
 )
 
 # Enable CORS
@@ -55,7 +57,7 @@ class LoanApplicant(BaseModel):
     gender: str
     race: str
 
-@app.get("/health")
+@app.get("/api/health")
 async def health():
     return {
         "status": "healthy",
@@ -71,7 +73,7 @@ async def startup_event():
         # mechanism, like a health check endpoint.
         print("Model or scaler not found. Please train the model first.")
 
-@app.post("/predict")
+@app.post("/api/predict")
 async def predict(applicant: LoanApplicant):
     if model is None or scaler is None:
         raise HTTPException(status_code=503, detail="Model not loaded. Please train the model first.")
